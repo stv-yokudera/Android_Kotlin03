@@ -5,23 +5,23 @@ import android.os.Bundle
 import java.util.*
 
 enum class SendType constructor(val int: Int) {
-    Mail(0),
-    Upload(1);
+    MAIL(0),
+    UPLOAD(1);
 
     companion object {
 
         // enumへの変換を行う
         fun fromInt(index: Int): SendType {
             // indexがenumの範囲外の値であった場合、"Mail"を返却する
-            return values().firstOrNull() { it.int == index } ?: Mail
+            return values().firstOrNull() { it.int == index } ?: MAIL
         }
     }
 
     val isMail: Boolean
-        get() = this == Mail
+        get() = this == MAIL
 
     val isUpload: Boolean
-        get() = this == Upload
+        get() = this == UPLOAD
 }
 
 class MainActivity : AppCompatActivity() {
@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        conditionalBranch()
-//        loop()
-//        loop2()
+        conditionalBranch()
+        loop()
+        loop2()
         loop3()
     }
 
@@ -59,14 +59,14 @@ class MainActivity : AppCompatActivity() {
         val intValue = 0
         val sendType = SendType.fromInt(intValue)
         when (sendType) {
-            SendType.Mail -> println("Mail")
-            SendType.Upload -> println("Upload")
+            SendType.MAIL -> println("Mail")
+            SendType.UPLOAD -> println("Upload")
         }
 
         val intValue2 = 1
         val sendTypeResult = when(SendType.fromInt(intValue2)) {
-            SendType.Mail -> "Mail"
-            SendType.Upload -> "Upload"
+            SendType.MAIL -> "Mail"
+            SendType.UPLOAD -> "Upload"
         }
         println("sendTypeResult: $sendTypeResult")
     }
@@ -111,13 +111,13 @@ class MainActivity : AppCompatActivity() {
 
         val intList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
-        intList.forEach {
+        intList.forEach { value ->
             // returnは、直近の関数を抜ける。ラムダではない。
             // forEachでなくloop2から抜けてしまう
-            if (it == 5) {
+            if (value == 5) {
                 return
             }
-            println(it)
+            println(value)
         }
 
         // ここまで来ない
@@ -132,28 +132,28 @@ class MainActivity : AppCompatActivity() {
         val intList = listOf(1, 2, 3, 4, 5)
 
         // ラムダを抜ける場合は、ラベルを定義して使用する
-        intList.forEach lam@ {
+        intList.forEach lam@ { value ->
             // ラベルを使用してforEachを抜ける(continue)
-            if (it == 3) {
+            if (value == 3) {
                 return@lam // continue
             }
-            println(it)
+            println(value)
         }
 
-        intList.forEach {
+        intList.forEach { value ->
             // 暗黙のラベル（ラムダが渡される関数名）を使用してforEachを抜ける(continue)
-            if (it == 3) {
+            if (value == 3) {
                 return@forEach // continue
             }
-            println(it)
+            println(value)
         }
 
         run loop@ {
-            intList.forEach {
-                if (it == 3) {
+            intList.forEach { value ->
+                if (value == 3) {
                     return@loop // break
                 }
-                println(it)
+                println(value)
             }
         }
 
