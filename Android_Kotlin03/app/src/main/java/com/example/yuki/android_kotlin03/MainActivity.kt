@@ -2,6 +2,7 @@ package com.example.yuki.android_kotlin03
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import java.util.*
 
 enum class SendType constructor(val int: Int) {
@@ -49,18 +50,18 @@ class MainActivity : AppCompatActivity() {
         } else {
             result = "奇数"
         }
-        println(result)
+        Log.d("conditionalBranch", "$result")
 
         val rand2 = Random().nextInt(100)
         // 上のif〜else文による代入を1行で表現
         val result2 = if (rand2 % 2 == 0) "偶数" else "奇数"
-        println(result2)
+        Log.d("conditionalBranch", "$result2")
 
         val intValue = 0
         val sendType = SendType.fromInt(intValue)
         when (sendType) {
-            SendType.MAIL -> println("Mail")
-            SendType.UPLOAD -> println("Upload")
+            SendType.MAIL -> Log.d("conditionalBranch", "Mail")
+            SendType.UPLOAD -> Log.d("conditionalBranch", "Upload")
         }
 
         val intValue2 = 1
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             SendType.MAIL -> "Mail"
             SendType.UPLOAD -> "Upload"
         }
-        println("sendTypeResult: $sendTypeResult")
+        Log.d("conditionalBranch", "sendTypeResult: $sendTypeResult")
     }
 
     /**
@@ -78,29 +79,30 @@ class MainActivity : AppCompatActivity() {
 
         val programmingLanguageList = listOf("Kotlin", "Java", "Swift", "Objective-C")
         for (programmingLanguage in programmingLanguageList) {
-            println(programmingLanguage)
+            Log.d("loop", "$programmingLanguage")
+
         }
 
         // 最適化によってindicesは実際にはオブジェクトを生成しないのでパフォーマンス劣化はない
         for (i in programmingLanguageList.indices) {
-            println("programmingLanguageList: $programmingLanguageList[i]")
+            Log.d("loop", "index $i, value ${programmingLanguageList[i]}")
         }
 
         for ((index, value) in programmingLanguageList.withIndex()) {
-            println("the element at $index is $value")
+            Log.d("loop", "the element at $index is $value")
         }
 
         // 10 ~ 1でループする
         var count = 10
         while (count > 0) {
-            println("count: $count")
+            Log.d("loop", "count: $count")
             count--
         }
 
         // 生成した乱数が3の倍数でなければループを続ける
         do {
             val rand = Random().nextInt(1000)
-            println("rand: $rand")
+            Log.d("loop", "rand: $rand")
         } while (rand % 3 != 0 )
     }
 
@@ -117,11 +119,11 @@ class MainActivity : AppCompatActivity() {
             if (value == 5) {
                 return
             }
-            println(value)
+            Log.d("loop2", "$value")
         }
 
         // ここまで来ない
-        println("loop2おわり")
+        Log.d("loop2", "loop2おわり")
     }
 
     /**
@@ -137,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             if (value == 3) {
                 return@lam // continue
             }
-            println(value)
+            Log.d("loop3", "$value")
         }
 
         intList.forEach { value ->
@@ -145,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             if (value == 3) {
                 return@forEach // continue
             }
-            println(value)
+            Log.d("loop3", "$value")
         }
 
         run loop@ {
@@ -153,11 +155,11 @@ class MainActivity : AppCompatActivity() {
                 if (value == 3) {
                     return@loop // break
                 }
-                println(value)
+                Log.d("loop3", "$value")
             }
         }
 
         // ここまで来る
-        println("loop3おわり")
+        Log.d("loop3", "loop3おわり")
     }
 }
